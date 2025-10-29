@@ -1,0 +1,32 @@
+services:
+  chatbot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: museum_chatbot
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-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}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      # Persist vectorstores
+      - ./RAG_chatabot_with_Langchain/data/vector_stores:/app/RAG_chatabot_with_Langchain/data/vector_stores
+      # Persist temp files
+      - ./RAG_chatabot_with_Langchain/data/tmp:/app/RAG_chatabot_with_Langchain/data/tmp
+      # Mount JSON data (read-only)
+      - ./musee.oeuvres1.json:/app/musee.oeuvres1.json:ro
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - chatbot-network
+
+networks:
+  chatbot-network:
+    driver: bridge
+

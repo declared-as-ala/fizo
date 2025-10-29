@@ -1,0 +1,50 @@
+# Environment variables
+.env
+.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+
+# Streamlit
+.streamlit/
+
+# Vector stores (can be recreated)
+RAG_chatabot_with_Langchain/data/vector_stores/
+RAG_chatabot_with_Langchain/data/tmp/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Data files (large files - uncomment if not needed in repo)
+# musee.oeuvres1.json
+
+# Docker
+.dockerignore
+
